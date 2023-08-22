@@ -56,7 +56,7 @@ namespace UserMVC.Controllers
                 HttpResponseMessage resMessage = _client.PostAsync(_client.BaseAddress + "/users", content).Result;
                 if (resMessage.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "User saved";
+                    TempData["successMessage"] = "User saved successfully";
                     return RedirectToAction("Index","User");
                 }
                 else
@@ -100,7 +100,7 @@ namespace UserMVC.Controllers
             HttpResponseMessage resMessage = _client.PutAsync(_client.BaseAddress + "/users", content).Result;
             if (resMessage.IsSuccessStatusCode)
             {
-                TempData["successMessage"] = "User details updated";
+                TempData["successMessage"] = "User details updated successfully";
                 return RedirectToAction("Index", "User");
             }
             else

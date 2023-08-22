@@ -22,7 +22,8 @@ namespace UserMVC.Models
 
         [DisplayName("Email")]
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
+        [RegularExpression(@"^[a-z0-9][-a-z0-9._]+@([-a-z0-9]+\.)+[a-z]{2,5}$", ErrorMessage = "Please enter a valid email")]
         public string Email { get; set; }
     }
 }

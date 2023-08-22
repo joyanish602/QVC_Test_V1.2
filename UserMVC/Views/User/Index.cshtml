@@ -6,9 +6,8 @@
 
 <h4>Users List</h4>
 
-<p style="text-align:right;">
-    <a asp-action="Create">Create User</a>
-</p>
+<a button type="button" class="btn btn-primary btn-sm" asp-action="Create" style="float:right">Create User</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -49,8 +48,29 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new { @class = "btn btn-warning btn-sm" }) 
+                @*@Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-sm" })*@
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-@item.Id">Delete</button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="modal-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalLabel">Confirm delete</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure want to delete this user?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" form="delForm-@item.Id" >Delete</button>
+                        <form id="delForm-@item.Id" method="post" asp-action="Delete" asp-route-id="@item.Id"></form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </td>
         </tr>
 }

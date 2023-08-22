@@ -40,14 +40,14 @@
             @if (!string.IsNullOrWhiteSpace(@successMessage))
             {
                 <div class="alert alert-success">
-                    <b>Success : </b>@successMessage
+                    @successMessage
                     <button type="button" class="btn-close float-end" data-bs-dismiss="alert" area-label="Close"></button>
                 </div>
             }
             else if (!string.IsNullOrWhiteSpace(@errorMessage))
             {
                 <div class="alert alert-danger">
-                    <b>Success : </b>@errorMessage
+                    @errorMessage
                     <button type="button" class="btn-close float-end" data-bs-dismiss="alert" area-label="Close"></button>
                 </div>
             }

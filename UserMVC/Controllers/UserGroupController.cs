@@ -98,7 +98,7 @@ namespace UserMVC.Controllers
                 HttpResponseMessage resMessage = _client.PostAsync(_client.BaseAddress + "/userGroups", content).Result;
                 if (resMessage.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "User group saved";
+                    TempData["successMessage"] = "User group created successfully";
                     return RedirectToAction("Index", "UserGroup");
                 }
                 else
