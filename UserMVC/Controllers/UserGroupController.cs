@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text;
 using UserMVC.Models;
+using X.PagedList;
 
 namespace UserMVC.Controllers
 {
@@ -21,7 +22,7 @@ namespace UserMVC.Controllers
 
 
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
             List<UserGroup> userGroups = new List<UserGroup>();
 
@@ -34,7 +35,7 @@ namespace UserMVC.Controllers
             else
             {
                 TempData["errorMessage"] = resMessage.Content.ReadAsStringAsync().Result;
-                return View(userGroups);
+                return View(userGroups.ToPagedList(page ?? 1, 5));
             }
 
             List<User> users = new List<User>();
@@ -47,7 +48,7 @@ namespace UserMVC.Controllers
             else
             {
                 TempData["errorMessage"] = resMessage.Content.ReadAsStringAsync().Result;
-                return View(userGroups);
+                return View(userGroups.ToPagedList(page ?? 1, 5));
             }
 
             foreach (var userGrp in userGroups)
@@ -57,7 +58,7 @@ namespace UserMVC.Controllers
                 userGrp.GroupMembersNames = string.Join(",", tmpUsers.Select(x => $"{x.FirstName + ' ' + x.LastName}"));
             }
 
-            return View(userGroups);
+            return View(userGroups.ToPagedList(page ?? 1, 5));
         }
 
         [HttpGet]

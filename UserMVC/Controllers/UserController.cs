@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using UserMVC.Models;
+using X.PagedList;
 
 namespace UserMVC.Controllers
 {
@@ -21,7 +22,7 @@ namespace UserMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
             List<User> users = new List<User>();
 
@@ -34,9 +35,9 @@ namespace UserMVC.Controllers
             else
             {
                 TempData["errorMessage"] = resMessage.Content.ReadAsStringAsync().Result;
-                return View(users);
+                return View(users.ToPagedList(page ?? 1, 5));
             }
-            return View(users);
+            return View(users.ToPagedList(page ?? 1, 5));
         }
 
         [HttpGet]

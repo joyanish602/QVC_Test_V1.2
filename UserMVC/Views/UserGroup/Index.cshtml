@@ -1,4 +1,8 @@
-﻿@model IEnumerable<UserMVC.Models.UserGroup>
+﻿@model IPagedList<UserMVC.Models.UserGroup>
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
 
 @{
     ViewData["Title"] = "User Groups";
@@ -12,13 +16,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GroupName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().GroupName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GroupMembersNames)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().GroupMembersNames)
             </th>
             <th></th>
         </tr>
@@ -66,3 +70,9 @@
         }
     </tbody>
 </table>
+<div class="float-end">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
